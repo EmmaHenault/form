@@ -1,0 +1,56 @@
+<form #myForm="ngForm" (ngSubmit)="myForm.valid && onSubmit()">
+	<div>
+	  Form submitted ? {{myForm.submitted}}
+	  Form valid ? {{myForm.valid}}
+	  Form invalid ? {{myForm.invalid}}
+	</div>
+  
+	<fieldset>
+	  <label for="email">Email</label>
+	  <input id="email" name="email" type="email"  [(ngModel)]="newUser.email" #email="ngModel" required email/>
+	</fieldset>
+  
+	<!-- Message d'erreurs de email -->
+	<div *ngIf="formSubmitted && email.errors">
+	  <span *ngIf="email.errors?.['required']">Le champ titre est requis</span>
+	  <span *ngIf="email.errors?.['email']">L'adresse email doit être valide</span>
+	</div>
+  
+  
+	<fieldset>
+	  <label for="firstName">First Name</label>
+	  <input id="firstName" name="firstName" [(ngModel)]="newUser.firstName" #firstName="ngModel" type="text" required minlength="3" required maxlength="15">
+	</fieldset>
+  
+   <!-- Message d'erreurs de Prénom -->
+	<div *ngIf="formSubmitted && firstName.errors">
+	  <span *ngIf="firstName.errors?.['required']">Le prénom est requis</span>
+	  <span *ngIf="firstName.errors?.['maxlength']">Le prénom ne doit pas dépasser 15 caractères</span>
+	  <span *ngIf="firstName.errors?.['minlength']">Le prénom doit comporter au moins 3 caractères</span>
+	</div>
+  
+
+	<fieldset>
+		<label for="lastName">First Name</label>
+		<input id="lastName" name="firstName" [(ngModel)]="newUser.lastName" #lastName="ngModel" type="text" required minlength="3" required maxlength="15">
+	  </fieldset>
+
+  <!-- Message d'erreurs de Nom -->
+  <div *ngIf="formSubmitted && lastName.errors">
+	<span *ngIf="lastName.errors?.['required']">Le prénom est requis</span>
+	<span *ngIf="lastName.errors?.['maxlength']">Le prénom ne doit pas dépasser 15 caractères</span>
+	<span *ngIf="lastName.errors?.['minlength']">Le prénom doit comporter au moins 3 caractères</span>
+  </div>
+
+  
+  
+  
+	<fieldset>
+	  <label for="password">Password</label>
+	  <input id="password" name="password" [(ngModel)]="newUser.password" type="password" required>
+	</fieldset>
+
+  
+
+	<button type="submit">Sauvegarder</button>
+  </form>
