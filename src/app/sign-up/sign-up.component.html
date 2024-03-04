@@ -12,7 +12,7 @@
   
 	<!-- Message d'erreurs de email -->
 	<div *ngIf="formSubmitted && email.errors">
-	  <span *ngIf="email.errors?.['required']">Le champ titre est requis</span>
+	  <span *ngIf="email.errors?.['required']">L'adresse mail est requise</span>
 	  <span *ngIf="email.errors?.['email']">L'adresse email doit être valide</span>
 	</div>
   
