@@ -1,0 +1,86 @@
+
+<form [formGroup]="signUpForm" (ngSubmit)="signUpForm.valid && onSubmit()" #signUpStatus="ngForm">
+	<label for="firstName">Prénom</label>
+	<input type="text" id="firstName" formControlName="firstName">
+
+		<div *ngIf="signUpStatus.submitted && signUpForm.controls.firstName.errors">
+			<span *ngIf="signUpForm.controls.firstName.errors?.['required']">
+				Le prénom doit être renseigné.
+			</span>
+			<span *ngIf="signUpForm.controls.firstName.errors?.['minLength']">
+				Le prénom doit faire au minimum 2 caractères.
+			</span>
+		</div>
+
+	<label for="lastName">Nom</label>
+	<input type="text" id="lastName" formControlName="lastName">
+
+		<div *ngIf="signUpStatus.submitted && signUpForm.controls.lastName.errors">
+			<span *ngIf="signUpForm.controls.lastName.errors?.['required']">
+				Le nom doit être renseigné.
+			</span>
+			<span *ngIf="signUpForm.controls.lastName.errors?.['minLength']">
+				Le nom doit faire au minimum 2 caractères.
+			</span>
+		</div>
+
+	<label for="email">email</label>
+	<input type="email" id="email" formControlName="email">
+
+	<div *ngIf="signUpStatus.submitted && signUpForm.controls.email.errors">
+		<span *ngIf="signUpForm.controls.email.errors?.['required']">
+			Le champ email doit être renseigné.
+		</span>
+		<span *ngIf="signUpForm.controls.email.errors?.['email']">
+			L'email n'est pas au bon format.
+		</span>
+	</div>
+
+	<div formGroupName="adress">
+		<label for="street">rue</label>
+		<input type="text" id="street" formControlName="street">
+		<div *ngIf="signUpStatus.submitted && signUpForm.get('adress.street')?.errors">
+			<span *ngIf="signUpForm.get('adress.street')?.errors?.['required']">
+				La rue doit être renseigné.
+			</span>
+		</div>
+		
+
+		<label for="zipCode">zipCode</label>
+		<input type="number" id="zipCode" formControlName="zipCode">
+		<div *ngIf="signUpStatus.submitted && signUpForm.get('adress.zipCode')?.errors">
+			<span *ngIf="signUpForm.get('adress.zipCode')?.errors?.['required']">
+				Le code postal doit être renseigné.
+			</span>
+		</div>
+
+		<label for="city">ville</label>
+		<input type="text" id="city" formControlName="city">
+		<div *ngIf="signUpStatus.submitted && signUpForm.controls.adress.get('city')?.errors">
+			<span *ngIf="signUpForm.controls.adress.get('city')?.errors?.['required']">
+				Le champ ville doit être renseigné.
+			</span>
+		</div>
+	</div>
+
+	<div formGroupName="passwords">
+		
+			<label for="password">Mot de passe</label>
+			<input type="password" id="password" formControlName="password">
+			<div *ngIf="signUpStatus.submitted && signUpForm.controls.passwords.get('password')?.errors">
+				<span *ngIf="signUpForm.controls.passwords.get('password')?.errors?.['required']">
+					Le mot de passe est requis.
+				</span>
+			</div>
+		
+		<label for="confirmPassword">Confirmer votre mot de passe</label>
+		<input type="password" id="confirmPassword" formControlName="confirmPassword">
+
+		<div *ngIf="signUpStatus.submitted && signUpForm.controls.passwords.invalid">
+			<span *ngIf="signUpForm.controls.passwords.errors?.['notEqual']">
+				Les mots de passes ne sont pas identiques.
+			</span>
+		</div>
+	</div>
+	<button>Valider</button>
+</form>
